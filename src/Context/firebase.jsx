@@ -262,7 +262,7 @@ export const FirebaseProvider = (props) => {
       if (ordertype === "Recent") {
         const q = query(
           UserInfoFolderInstance,
-          orderBy("dateOfPublish"),
+          orderBy("dateOfPublish","desc"),
           limit(5)
         );
         const querysnap = await getDocs(q);
