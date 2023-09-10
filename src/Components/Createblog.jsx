@@ -49,7 +49,10 @@ const Create = () => {
         alert("You have written an invalid Blog");
         return;
       }
-      const currdate = new Date().toLocaleDateString();
+      let currdate = new Date().toLocaleDateString();
+      // This is to reverse the string but not worked
+      // str=str.split("").reverse("").join("");
+      // currdate=currdate.split("").reverse("").join("");
       await firebaseCon.addingBlog(
         product_obj.category,
         product_obj.tittle,

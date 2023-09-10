@@ -22,6 +22,8 @@ const AllBlogs = () => {
     <>
       <div style={{ minHeight: "89vh" }}>
         {blogarr.map((elements) => {
+          // let revdateofPublish=elements.data().dateOfPublish;
+          // revdateofPublish=revdateofPublish.split("").reverse("").join("");
           return (
             <BlogCard
               key={elements.id}
