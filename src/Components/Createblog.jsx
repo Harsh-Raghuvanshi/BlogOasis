@@ -5,10 +5,16 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import TitleIcon from "@mui/icons-material/Title";
 import { useFirebase } from "../Context/firebase";
 import { useNavigate } from "react-router-dom";
+import Alerts from "./Alerts";
 const Create = () => {
   const navigate = useNavigate();
   const firebaseCon = useFirebase();
   let userinformation = firebaseCon.userallData;
+  let [showAlert, setshowAlert] = useState({
+    toshow: false,
+    message: "",
+    type: "",
+  });
 
   let [product_obj, set_pro_obj] = useState({
     category: "Generalized",
@@ -25,12 +31,12 @@ const Create = () => {
     if (firebaseCon.loading) {
       console.log("waiting");
     } else {
-      console.log("Heello",firebaseCon.isLoggedin);
+      console.log("Heello", firebaseCon.isLoggedin);
       if (!firebaseCon.isLoggedin) {
         navigate("/signin");
       }
     }
-  }, [firebaseCon.isLoggedin, navigate,firebaseCon.loading]);
+  }, [firebaseCon.isLoggedin, navigate, firebaseCon.loading]);
 
   const changing = (event) => {
     let { name, value } = event.target;
@@ -46,7 +52,14 @@ const Create = () => {
     try {
       event.preventDefault();
       if (!product_obj.tittle || !product_obj.description) {
-        alert("You have written an invalid Blog");
+        setshowAlert({
+          toshow: true,
+          message: "Invalid Blog Written",
+          type: "danger",
+        });
+        setTimeout(() => {
+          setshowAlert({ toshow: false, message: "", type: "" });
+        }, 2000);
         return;
       }
       let currdate = new Date().toLocaleDateString();
@@ -64,8 +77,15 @@ const Create = () => {
         product_obj.email,
         currdate
       );
-      alert("Created Successfully");
-      navigate("/allblogs");
+      setshowAlert({
+        toshow: true,
+        message: "Blog Succesfully Created ",
+        type: "success",
+      });
+      setTimeout(() => {
+        setshowAlert({ toshow: false, message: "", type: "" });
+        navigate("/allblogs");
+      }, 2000);
     } catch (err) {
       console.log(err);
     }
@@ -73,6 +93,9 @@ const Create = () => {
 
   return (
     <>
+      {showAlert.toshow && (
+        <Alerts message={showAlert.message} type={showAlert.type} />
+      )}
       <div className="page_container ">
         <div className="all_of_content_form" style={{ width: "95%" }}>
           <h1 className="fw-bolder p-2 center heading1">Let's Create</h1>

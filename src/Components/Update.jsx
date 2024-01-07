@@ -5,6 +5,8 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import TitleIcon from "@mui/icons-material/Title";
 import { useFirebase } from "../Context/firebase";
 import { useNavigate, useParams } from "react-router-dom";
+import Alerts from "./Alerts";
+
 const Update = () => {
   let blogid = useParams()._id;
   const navigate = useNavigate();
@@ -15,7 +17,11 @@ const Update = () => {
     tittle: "",
     description: "",
   });
-
+  let [showAlert, setshowAlert] = useState({
+    toshow: false,
+    message: "",
+    type: "",
+  });
   const gettingBlogWaitForSometime = async (bid) => {
     try {
       let blogToBeEdited = await firebaseCon.getBlogWithId(bid);
@@ -66,8 +72,19 @@ const Update = () => {
         product_obj.tittle,
         product_obj.description
       );
-      alert("Updated Successfully");
-      navigate("/allblogs");
+      console.log("hello i am here ");
+      console.log(showAlert);
+      setshowAlert({
+        toshow: true,
+        message: "Succesfully Updated Your Blog",
+        type: "success",
+      });
+      console.log("hii how are you");
+      console.log(showAlert);
+      setTimeout(() => {
+        setshowAlert({ toshow: false, message: "", type: "" });
+        navigate("/allblogs");
+      }, 2000);
     } catch (err) {
       alert("Something went wrong");
       console.log(err);
@@ -76,6 +93,9 @@ const Update = () => {
 
   return (
     <>
+      {showAlert.toshow && (
+        <Alerts message={showAlert.message} type={showAlert.type} />
+      )}
       <div className="page_container ">
         <div className="all_of_content_form" style={{ width: "95%" }}>
           <h1 className="fw-bolder p-2 center heading1">Update/Edit</h1>

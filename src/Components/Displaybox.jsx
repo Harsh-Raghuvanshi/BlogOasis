@@ -27,11 +27,12 @@ const Displaybox = (props) => {
         }}
       >
         <ul className="">
-          <li className="list-group-item center fw-bold text-warning center h5">
+          <li className="list-group-item center mx-0 my-1 fw-bold text-warning center h5">
             {props.heading}
           </li>
+
           {result.map((element,ind) => {
-             return <Link to='/allblogs' style={{textDecoration:"none",color: "rgb(77, 76, 76)"}} key={ind}><li className="list-group-item p-1" >{element}</li></Link>;
+             return <Link to='/allblogs' style={{textDecoration:"none",color: "rgb(77, 76, 76)"}} key={ind}><li className="list-group-item py" >{element}</li></Link>;
           })}
          
         </ul>

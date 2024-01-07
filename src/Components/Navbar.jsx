@@ -25,7 +25,6 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className={`collapse navbar-collapse ${show?"show":" "}`} 
-          //  id="navbarSupportedContent"
            >
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
               <li className="nav-item px-1">
@@ -54,9 +53,6 @@ const Navbar = () => {
                       MyProfile
                     </Link>
                   </li>
-                  {/* <li>
-                    <button onClick={()=>settheme(!theme)}>{theme?<NightlightIcon/>:<LightModeIcon/>}</button>
-                  </li> */}
                   <li>
                     <Link className="dropdown-item" to="/createblog">
                      Create Blog

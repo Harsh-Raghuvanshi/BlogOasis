@@ -21,7 +21,6 @@ const MyProfile = () => {
   }, [firebaseCon.userallData]);
   useEffect(() => {
     if (firebaseCon.loading) {
-      
       console.log("waiting");
     } else {
       if (!firebaseCon.isLoggedin) {
@@ -52,7 +51,7 @@ const MyProfile = () => {
       <div className="card mx-auto" style={{ width: "15rem", border: "none" }}>
         <img
           src={url || blank_profile_picture}
-          className="card-img-top m-3"
+          className="card-img-top"
           alt="Loading . . ."
           style={{ borderRadius: "120px" }}
         />

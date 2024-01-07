@@ -49,14 +49,14 @@ const BlogCard = (props) => {
               isliked ? "btn-warning" : null
             }`}
             onClick={async () => {
-              await firebaseCon.transactReactionToBlogs(blogid, userid, "like");
-
               if (isliked) {
                 setLikecount(Likecount - 1);
               } else {
                 setLikecount(Likecount + 1);
               }
               setisliked(!isliked);
+              await firebaseCon.transactReactionToBlogs(blogid, userid, "like");
+
             }}
           >
             {Likecount} <ThumbUpAltIcon />
@@ -66,17 +66,17 @@ const BlogCard = (props) => {
               isunliked ? "btn-warning" : null
             }`}
             onClick={async () => {
-              await firebaseCon.transactReactionToBlogs(
-                blogid,
-                userid,
-                "unlike"
-              );
               if (isunliked) {
                 setUnlikecount(Unlikecount - 1);
               } else {
                 setUnlikecount(Unlikecount + 1);
               }
               setisunliked(!isunliked);
+              await firebaseCon.transactReactionToBlogs(
+                blogid,
+                userid,
+                "unlike"
+              );
             }}
           >
             {Unlikecount} <ThumbDownIcon />
@@ -86,18 +86,18 @@ const BlogCard = (props) => {
               ishelped ? "btn-warning" : null
             }`}
             onClick={async () => {
-              await firebaseCon.transactReactionToBlogs(
-                blogid,
-                userid,
-                "helpful"
-              );
-
               if (ishelped) {
                 setHelpcount(Helpcount - 1);
               } else {
                 setHelpcount(Helpcount + 1);
               }
               setishelped(!ishelped);
+              await firebaseCon.transactReactionToBlogs(
+                blogid,
+                userid,
+                "helpful"
+              );
+
             }}
           >
             {Helpcount} <TipsAndUpdatesIcon />

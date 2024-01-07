@@ -4,12 +4,12 @@ const Profilecard = (props) => {
   let temp = require(`../Images/${props.temp}`);
   return (
     <>
-      <div className="card mx-auto" style={{ width: "15rem", border: "none" }}>
+      <div className="card" style={{ width: "15rem", border: "none" }}>
         <img
           src={temp}
-          className="card-img-top m-3"
+          className="card-img-top"
           alt="..."
-          style={{ borderRadius: "100px" }}
+          style={{ borderRadius: "100px"}}
         />
         <div className="card-body">
           <h5 className="card-title  center fw-bold">{ props.name}</h5>

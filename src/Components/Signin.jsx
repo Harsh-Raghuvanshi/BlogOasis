@@ -3,12 +3,16 @@ import EmailIcon from "@mui/icons-material/Email";
 import KeyIcon from "@mui/icons-material/Key";
 import login_image from "../Images/signinimage.jpg";
 import { useFirebase } from "../Context/firebase";
-// import GoogleIcon from '@mui/icons-material/Google';
 import { useNavigate } from "react-router-dom";
+import Alerts from "./Alerts";
 const Signin = () => {
   const navigate = useNavigate();
   const firebaseCon = useFirebase();
-
+  let [showAlert, setshowAlert] = useState({
+    toshow: false,
+    message: "",
+    type: "",
+  });
   let [logindata, setlogindata] = useState({
     email: "",
     password: "",
@@ -35,7 +39,14 @@ const Signin = () => {
     try {
       event.preventDefault();
       if (!logindata.email || !logindata.password) {
-        alert("Please fill all fields");
+        setshowAlert({
+          toshow: true,
+          message: "Invalid Credentials provided",
+          type: "danger",
+        });
+        setTimeout(() => {
+          setshowAlert({ toshow: false, message: "", type: "" });
+        }, 2000);
         return;
       }
       const res = await firebaseCon.loginUserWithEmailAndPassword(
@@ -43,7 +54,15 @@ const Signin = () => {
         logindata.password
       );
       if (res) {
-        navigate("/");
+        setshowAlert({
+          toshow: true,
+          message: "Succesful Login",
+          type: "success",
+        });
+        setTimeout(() => {
+          setshowAlert({ toshow: false, message: "", type: "" });
+          navigate("/");
+        }, 2000);
       }
       setlogindata({
         email: "",
@@ -61,6 +80,10 @@ const Signin = () => {
 
   return (
     <>
+      {showAlert.toshow && (
+        <Alerts message={showAlert.message} type={showAlert.type} />
+      )}
+      ;
       <div className="page_container">
         <div className="all_of_content_form">
           <h1 className="fw-bolder center heading1">Sign In</h1>
