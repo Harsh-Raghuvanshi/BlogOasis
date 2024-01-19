@@ -14,10 +14,9 @@ import Otherprofile from "./Components/Otherprofile"
 import MyProfile from "./Components/Myprofile";
 import AllBlogs from "./Components/AllBlogs";
 const App=()=>{
-    
     return(
         <>
-        <Navbar/>
+        <Navbar />
         <Routes>
             <Route exact path="/" Component={()=><Home/>}></Route>
             <Route exact path="/about" Component={()=><About/>}></Route>

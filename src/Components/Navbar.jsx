@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom";
 import { useFirebase } from "../Context/firebase";
+import Brightness2Icon from '@mui/icons-material/Brightness2';
+import Brightness5Icon from '@mui/icons-material/Brightness4';
 const Navbar = () => {
   const firebaseCon=useFirebase();
+  let[mode,setMode]=useState('light');
   let[show,setshow]=useState(false);
+  let mainelement=document.querySelector('html');
+  mainelement.setAttribute('data-bs-theme', mode);
+
 
   return (
     <>
@@ -72,7 +78,9 @@ const Navbar = () => {
                 </ul>
               </li>
               
+              
             </ul>
+              <button style={{border:'none',borderRadius:'20px'}} onClick={()=>{if(mode==='light')setMode('dark');else setMode('light')}}>{mode==='light'?<Brightness2Icon/>:<Brightness5Icon/>}</button>
           </div>
         </div>
       </nav>
