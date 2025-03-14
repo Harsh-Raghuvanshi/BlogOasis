@@ -47,6 +47,10 @@ const Signup = () => {
         alert("Please fill all fields");
         return;
       }
+      if(registerdata.password.length<6){
+        alert("Password length is less than 6 should be more");
+        return;
+      }
       console.log("Signing Up user ");
       await firebaseCon.savingUserDetails(
         registerdata.email,
